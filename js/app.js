@@ -1,12 +1,12 @@
 // Arreglo de ingresos
-const ingresos = [
+ ingresos = [
   new Ingreso('Salario', 25000),
   new Ingreso('Venta auto', 55000),
   new Ingreso('Airbnb', 5000)
 ];
 
 // Arreglo de egresos
-const egresos = [
+ egresos = [
   new Egreso('Renta', 4000),
   new Egreso('Ropa', 800),
   new Egreso('Despensa', 6000),
