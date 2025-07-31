@@ -1,31 +1,64 @@
 // Arreglo de ingresos
- ingresos = [
+ let ingresos = [
   new Ingreso('Salario', 25000),
   new Ingreso('Venta auto', 55000),
   new Ingreso('Airbnb', 5000)
 ];
 
 // Arreglo de egresos
- egresos = [
+ let egresos = [
   new Egreso('Renta', 4000),
   new Egreso('Ropa', 800),
   new Egreso('Despensa', 6000),
 ];
 
-totalIngresos = () => {
-    totalIngresos = 0
+const totalIngresos = () => {
+    totalIngreso = 0
     for (i = 0; i < ingresos.length; i++) {
-        totalIngresos = totalIngresos + ingresos[i]._valor
+        totalIngreso = totalIngreso + ingresos[i]._valor
     }
-    return totalIngresos
+    return totalIngreso
 }
 
-totalEgresos = () => {
-    totalEgresos = 0
+const totalEgresos = () => {
+    totalEgreso = 0
     for (i = 0; i < egresos.length; i++) {
-        totalEgresos = totalEgresos + egresos[i]._valor
+        totalEgreso = totalEgreso + egresos[i]._valor
     }
-    return totalEgresos
+    return totalEgreso
+}
+
+const cargarApp = () => {
+  cargarCabecero()
+  cargarIngresos()
+  cargarEgresos()
+}
+
+const eliminarEgreso = (id) => {
+  indiceEliminar = egresos.findIndex(Egreso => Egreso.id === id)
+  egresos.splice(indiceEliminar, 1)
+  cargarCabecero()
+  cargarEgresos()
+}
+
+const cargarCabecero = () => {
+    let elemento
+    let presupuesto
+    let porcentajeEgreso
+
+    elemento = document.getElementById("presupuesto")
+    presupuesto = totalIngresos() - totalEgresos()
+    elemento.innerHTML = formatoMoneda(presupuesto) + " MNX"
+
+    elemento = document.getElementById("ingresos")
+    elemento.innerHTML = formatoMoneda(totalIngresos()) + " MNX" 
+
+    elemento = document.getElementById("egresos")
+    elemento.innerHTML = formatoMoneda(totalEgresos()) + " MNX"
+
+    porcentajeEgreso = totalEgresos / totalIngresos
+    elemento = document.getElementById("porcentaje")
+    elemento.innerHTML =  formatoPorcentaje(porcentajeEgreso)
 }
 
 cargarIngresos = () => {
@@ -82,36 +115,3 @@ formatoPorcentaje = valor => valor.toLocaleString('es-MX', {
   style: 'percent',
   minimumFractionDigits: 2
 });
-
-cargarCabecero = () => {
-    let elemento
-    let presupuesto
-    let porcentajeEgreso
-
-    elemento = document.getElementById("presupuesto")
-    presupuesto = totalIngresos() - totalEgresos()
-    elemento.innerHTML = formatoMoneda(presupuesto) + " MNX"
-
-    elemento = document.getElementById("ingresos")
-    elemento.innerHTML = formatoMoneda(totalIngresos) + " MNX" 
-
-    elemento = document.getElementById("egresos")
-    elemento.innerHTML = formatoMoneda(totalEgresos) + " MNX"
-
-    porcentajeEgreso = totalEgresos / totalIngresos
-    elemento = document.getElementById("porcentaje")
-    elemento.innerHTML =  formatoPorcentaje(porcentajeEgreso)
-}
-
-cargarApp = () => {
-  cargarCabecero()
-  cargarIngresos()
-  cargarEgresos()
-}
-
-eliminarEgreso = (id) => {
-  indiceEliminar = egresos.findIndex(Egreso => Egreso.id === id)
-  egresos.splice(indiceEliminar, 1)
-  cargarCabecero()
-  cargarEgresos()
-}
