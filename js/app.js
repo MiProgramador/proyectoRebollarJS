@@ -63,7 +63,9 @@ const cargarCabecero = () => {
     elemento = document.getElementById("egresos")
     elemento.innerHTML = formatoMoneda(totalEgresos()) + " MNX"
 
-    porcentajeEgreso = totalEgresos() / totalIngresos()
+    if (totalIngresos() != 0) {
+      porcentajeEgreso = totalEgresos() / totalIngresos()
+    } else { porcentajeEgreso = 0 }
     elemento = document.getElementById("porcentaje")
     elemento.innerHTML =  formatoPorcentaje(porcentajeEgreso)
 }
@@ -122,3 +124,27 @@ formatoPorcentaje = valor => valor.toLocaleString('es-MX', {
   style: 'percent',
   minimumFractionDigits: 2
 });
+
+const agregarDato = () => {
+  const forma = document.getElementById("forma")
+  const tipo = forma.tipo.value
+  const descripcion = forma.descripcion.value.trim()
+  const valor = parseFloat(forma.valor.value)
+
+  if (descripcion !== "" && !isNaN(valor)) {
+    if (tipo === "+") {
+      ingresos.push(new Ingreso(descripcion, valor))
+      cargarCabecero()
+      cargarIngresos()
+    } else {
+      egresos.push(new Egreso(descripcion, valor));
+      cargarCabecero()
+      cargarEgresos()
+    }
+  } else {
+    alert("Por favor llena todos los campos correctamente.")
+  }
+  forma.tipo.value = "+"
+  forma.descripcion.value = ""
+  forma.valor.value = ""
+}
