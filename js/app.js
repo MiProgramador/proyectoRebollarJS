@@ -41,6 +41,13 @@ const eliminarEgreso = (id) => {
   cargarEgresos()
 }
 
+const eliminarIngreso = (id) => {
+  indiceEliminar = ingresos.findIndex(Ingreso => Ingreso.id === id)
+  ingresos.splice(indiceEliminar, 1)
+  cargarCabecero()
+  cargarIngresos()
+}
+
 const cargarCabecero = () => {
     let elemento
     let presupuesto
@@ -71,7 +78,7 @@ cargarIngresos = () => {
           "<div class=\"derecha limpiarEstilos\">" + 
             "<div class=\"elemento_valor\">" + ingresos[i]._valor+  "</div>" +
             "<div class=\"elemento_eliminar\">" +
-              "<button type=\"button\" class=\"elemento_eliminar--btn\"" + " id=\"ingreso_" + i + "\">" +
+              "<button type=\"button\" class=\"elemento_eliminar--btn\" onclick=\"eliminarIngreso(" + ingresos[i]._id + ")\">" +
                 "<ion-icon class=\"close-circle-outline\"></ion-icon>" +
               "</button>" +
             "</div>" +
