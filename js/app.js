@@ -58,10 +58,10 @@ const cargarCabecero = () => {
     elemento.innerHTML = formatoMoneda(presupuesto) + " MNX"
 
     elemento = document.getElementById("ingresos")
-    elemento.innerHTML = formatoMoneda(totalIngresos()) + " MNX" 
+    elemento.innerHTML = "+" + formatoMoneda(totalIngresos()) + " MNX" 
 
     elemento = document.getElementById("egresos")
-    elemento.innerHTML = formatoMoneda(totalEgresos()) + " MNX"
+    elemento.innerHTML = "-" + formatoMoneda(totalEgresos()) + " MNX"
 
     if (totalIngresos() != 0) {
       porcentajeEgreso = totalEgresos() / totalIngresos()
