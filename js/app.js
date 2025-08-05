@@ -78,7 +78,7 @@ cargarIngresos = () => {
         "<div class=\"elemento limpiarEstilos\">" +
           "<div class=\"elemento_descripcion\">" + ingresos[i]._descripcion + "</div>" +
           "<div class=\"derecha limpiarEstilos\">" + 
-            "<div class=\"elemento_valor\">" + formatoMoneda(ingresos[i]._valor) +  " MNX </div>" +
+            "<div class=\"elemento_valor\"> +" + formatoMoneda(ingresos[i]._valor) +  " MNX </div>" +
             "<div class=\"elemento_eliminar\">" +
               "<button type=\"button\" class=\"elemento_eliminar--btn\" onclick=\"eliminarIngreso(" + ingresos[i]._id + ")\">" +
                 "<ion-icon class=\"close-circle-outline\"></ion-icon>" +
@@ -93,7 +93,7 @@ cargarIngresos = () => {
 cargarEgresos = () => {
     let elemento = document.getElementById("lista-egresos")
     let porcentaje
-    let totalE = totalEgresos()
+    let totalE = totalEgresos() === 0 ? 1 : totalEgresos()
     egresosHTML = ""
     for (i = 0; i < egresos.length; i++) {
         porcentaje = formatoPorcentaje(egresos[i]._valor/totalE)
@@ -101,7 +101,7 @@ cargarEgresos = () => {
         "<div class=\"elemento limpiarEstilos\">" +
           "<div class=\"elemento_descripcion\">" + egresos[i]._descripcion + "</div>" +
           "<div class=\"derecha limpiarEstilos\">" + 
-            "<div class=\"elemento_valor\">" + formatoMoneda(egresos[i]._valor) +  " MNX </div>" +
+            "<div class=\"elemento_valor\"> -" + formatoMoneda(egresos[i]._valor) +  " MNX </div>" +
             "<div class=\"elemento_porcentaje\">" + porcentaje + "</div>" +
             "<div class=\"elemento_eliminar\">" +
               "<button type=\"button\" class=\"elemento_eliminar--btn\" onclick=\"eliminarEgreso(" + egresos[i]._id + ")\"" + ">" +
